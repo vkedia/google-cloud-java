@@ -100,6 +100,14 @@ public final class SpannerExceptionFactory {
         ErrorCode.CANCELLED, cause == null ? "Cancelled" : cause.getMessage(), cause);
   }
 
+  static SpannerException wrapSpannerException(SpannerException cause, @Nullable String resource) {
+    if (resource == null) {
+      return cause;
+    }
+    return new SpannerException(DoNotConstructDirectly.ALLOWED, cause.getErrorCode(),
+        cause.isRetryable(), cause.getMessage(), cause, resource);
+  }
+
   private static String formatMessage(ErrorCode code, @Nullable String message) {
     if (message == null) {
       return code.toString();

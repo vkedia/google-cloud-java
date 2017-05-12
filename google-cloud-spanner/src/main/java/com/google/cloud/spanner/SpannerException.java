@@ -26,6 +26,7 @@ public class SpannerException extends BaseServiceException {
 
   private final ErrorCode code;
   private final boolean retryable;
+  private final String resourceName;
 
   /** Private constructor. Use {@link SpannerExceptionFactory} to create instances. */
   SpannerException(
@@ -33,13 +34,15 @@ public class SpannerException extends BaseServiceException {
       ErrorCode code,
       boolean retryable,
       @Nullable String message,
-      @Nullable Throwable cause) {
+      @Nullable Throwable cause,
+      @Nullable String resourceName) {
     super(code.getCode(), message, null /* reason */, false /* idempotent */, cause);
     this.retryable = retryable;
     if (token != DoNotConstructDirectly.ALLOWED) {
       throw new AssertionError("Do not construct directly: use SpannerExceptionFactory");
     }
     this.code = Preconditions.checkNotNull(code);
+    this.resourceName = resourceName;
   }
 
   /** Returns the error code associated with this exception. */
@@ -51,6 +54,10 @@ public class SpannerException extends BaseServiceException {
   @Override
   public boolean isRetryable() {
     return retryable;
+  }
+
+  public String getResourceName() {
+    return resourceName;
   }
 
   enum DoNotConstructDirectly {

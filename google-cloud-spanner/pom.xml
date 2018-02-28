@@ -101,7 +101,7 @@
     <dependency>
       <groupId>com.google.api.grpc</groupId>
       <artifactId>proto-google-cloud-spanner-v1</artifactId>
-      <version>0.1.11</version>
+      <version>0.1.11b</version>
     </dependency>
     <dependency>
       <groupId>com.google.api.grpc</groupId>
@@ -116,7 +116,7 @@
     <dependency>
       <groupId>com.google.api.grpc</groupId>
       <artifactId>grpc-google-cloud-spanner-v1</artifactId>
-      <version>0.1.11</version>
+      <version>0.1.11b</version>
     </dependency>
     <dependency>
       <groupId>com.google.api.grpc</groupId>
